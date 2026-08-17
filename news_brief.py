@@ -158,54 +158,97 @@ def filter_today(items: List[NewsItem], tz: datetime.timezone, today_only: bool)
 # ---------------------------------------------------------------------------
 
 def build_brief(categories: Dict[str, List[NewsItem]], tz: datetime.timezone) -> (str, str):
-    """返回 (html, text) 两种格式的简报。"""
+    """返回 (html, text) 两种格式的简报。
+
+    - html_doc：用于 pushplus（带内联样式）
+    - text_doc：用于 serverchan / 企业微信（Markdown 友好，单 \n 不分段落，
+      用 \n\n + 标题/分隔条让微信客户端正确分段）
+    """
     now = datetime.datetime.now(tz)
     date_str = now.strftime("%Y年%m月%d日 %H:%M")
-    weekday = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"][now.weekday()]
-
+    weekday = "一二三四五六日"[now.weekday()]
     total = sum(len(v) for v in categories.values())
 
-    # ---- HTML ----
-    html_parts = [
-        f"<h1>📰 界面新闻 · 每日快报</h1>",
-        f"<p style='color:#888;font-size:13px;'>"
-        f"{date_str} {weekday} ｜ 共 {total} 条（今日热点 / 公司头条 / 时事追踪）</p>",
-        "<hr/>",
+    # ---------------------------- HTML ----------------------------
+    style = (
+        "<style>"
+        ".ns{margin:18px 0 0 0;}"
+        ".ns h2{color:#d83a3a;border-left:4px solid #d83a3a;padding:2px 0 2px 8px;margin:0 0 8px 0;}"
+        ".ns h2 small{font-size:12px;color:#888;font-weight:normal;margin-left:6px;}"
+        ".n{margin:12px 0;padding:0 0 10px 0;border-bottom:1px dashed #eee;}"
+        ".n:last-child{border-bottom:none;}"
+        ".t{font-size:15px;color:#222;}"
+        ".t a{color:#222;text-decoration:none;}"
+        ".tm{color:#999;font-size:12px;margin-left:6px;}"
+        ".s{color:#555;font-size:13px;margin:4px 0 6px 0;line-height:1.55;}"
+        ".u{font-size:11px;color:#888;word-break:break-all;}"
+        ".empty{color:#aaa;font-style:italic;margin:6px 0;}"
+        "</style>"
+    )
+    h = [
+        style,
+        "<h1 style='margin:0 0 6px 0;color:#222;'>📰 界面新闻 · 每日快报</h1>",
+        f"<p style='color:#888;font-size:13px;margin:0 0 6px 0;'>"
+        f"🕐 {date_str} 星期{weekday} ｜ 共 {total} 条</p>",
     ]
     for name, items in categories.items():
-        html_parts.append(f"<h2>🔸 {name}（{len(items)} 条）</h2>")
+        h.append("<div class='ns'>")
+        h.append(
+            f"<h2>🔸 {name}<small>（{len(items)} 条）</small></h2>"
+        )
         if not items:
-            html_parts.append("<p style='color:#999;'>今日暂无更新</p>")
+            h.append("<p class='empty'>今日暂无更新</p>")
+            h.append("</div>")
             continue
-        html_parts.append("<ol>")
         for it in items:
-            t = it.time_text or ""
-            summary = it.summary or ""
-            html_parts.append(
-                f"<li>"
-                f"<b><a href='{html.escape(it.url)}'>{html.escape(it.title)}</a></b> "
-                f"<span style='color:#aaa;font-size:12px;'>{html.escape(t)}</span>"
-                f"<br/><span style='color:#555;font-size:14px;'>{html.escape(summary)}</span>"
-                f"</li>"
+            t = html.escape(it.time_text or "")
+            summary = html.escape(it.summary or "")
+            url = html.escape(it.url)
+            h.append("<div class='n'>")
+            h.append(
+                "<div class='t'>"
+                f"<a href='{url}'>{html.escape(it.title)}</a>"
+                + (f"<span class='tm'>{t}</span>" if t else "")
+                + "</div>"
             )
-        html_parts.append("</ol>")
-    html_doc = "\n".join(html_parts)
+            if summary:
+                h.append(f"<div class='s'>{summary}</div>")
+            h.append(f"<div class='u'>🔗 <a href='{url}'>{url}</a></div>")
+            h.append("</div>")
+        h.append("</div>")
+    html_doc = "\n".join(h)
 
-    # ---- 纯文本 ----
-    text_parts = [f"📰 界面新闻 · 每日快报", f"{date_str} {weekday} ｜ 共 {total} 条", ""]
+    # ---------------------------- Markdown / 纯文本 ----------------------------
+    def short(s, n=180):
+        s = (s or "").replace("\n", " ").strip()
+        return s if len(s) <= n else s[: max(n - 1, 1)] + "…"
+
+    sections = []
     for name, items in categories.items():
-        text_parts.append(f"【{name}】（{len(items)} 条）")
+        body = [f"### 🔸 {name}（{len(items)} 条）", ""]
         if not items:
-            text_parts.append("  今日暂无更新")
+            body.append("_今日暂无更新_")
+            sections.append("\n".join(body))
             continue
         for i, it in enumerate(items, 1):
-            t = f"[{it.time_text}] " if it.time_text else ""
-            text_parts.append(f"{i}. {t}{it.title}")
+            item = [f"**{i}. [{it.title}]({it.url})**"]
+            if it.time_text:
+                item.append(f"⏰ {it.time_text}")
             if it.summary:
-                text_parts.append(f"   {it.summary}")
-            text_parts.append(f"   {it.url}")
-        text_parts.append("")
-    text_doc = "\n".join(text_parts)
+                item.append(f"📝 {short(it.summary)}")
+            item.append(f"🔗 [阅读原文]({it.url})")
+            body.append("\n".join(item))
+            body.append("")  # 条与条之间空行 → 微信段间距
+        # 去掉段落末尾多余空行
+        while body and body[-1] == "":
+            body.pop()
+        sections.append("\n".join(body))
+
+    head = (
+        f"# 📰 界面新闻 · 每日快报\n\n"
+        f"🕐 {date_str} 星期{weekday} ｜ 共 {total} 条"
+    )
+    text_doc = head + "\n\n---\n\n" + "\n\n---\n\n".join(sections)
 
     return html_doc, text_doc
 
