@@ -271,6 +271,37 @@ def _short(s: str, n: int = 180) -> str:
     return s if len(s) <= n else s[: max(n - 1, 1)] + "…"
 
 
+def write_news_artifact(
+    categories: Dict[str, List[NewsItem]], tz: datetime.timezone
+) -> None:
+    """把当天抓取的新闻写成 news.json，供工作台等页面通过 GitHub 采集展示。
+
+    写入仓库根目录 news.json（结构化的三栏目新闻），由 workflow 提交回仓库，
+    页面侧用 raw.githubusercontent.com 直接 fetch，无需密钥、无跨域限制。
+    """
+
+    def _cat(name: str, items: List[NewsItem]):
+        return [
+            {
+                "title": it.title,
+                "url": it.url,
+                "time": it.time_text or "",
+                "summary": _short(it.summary or "", 180),
+            }
+            for it in items
+        ]
+
+    data = {
+        "updated_at": datetime.datetime.now(tz).isoformat(timespec="seconds"),
+        "source": "界面新闻 · 快报",
+        "categories": {name: _cat(name, items) for name, items in categories.items()},
+    }
+    with open("news.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    total = sum(len(v) for v in data["categories"].values())
+    print(f"[info] 已写入 news.json（{total} 条）", file=sys.stderr)
+
+
 def build_chat_text(
     categories: Dict[str, List[NewsItem]], tz: datetime.timezone, detail: bool = False
 ) -> str:
@@ -481,6 +512,10 @@ def main():
         else:
             print(CHAT_SPLIT.join(chunks))
         return
+
+    # ---- 生成 news.json 产物（供工作台页面 GitHub 采集；仅定时/推送模式，不落 dry-run）----
+    if not dry_run:
+        write_news_artifact(categories, tz)
 
     # ---- 跨日去重：每天首次运行(8:00)全量；同日后续运行(17:00)剔除已推送 ----
     today_str = datetime.datetime.now(tz).strftime("%Y-%m-%d")
