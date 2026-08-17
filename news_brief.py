@@ -299,6 +299,18 @@ def save_state(state: dict) -> None:
         print(f"[warn] 写入去重状态失败：{e}", file=sys.stderr)
 
 
+def _getenv(name: str, default: str) -> str:
+    """读取环境变量；为空或仅空白时回退默认值。
+
+    解决 GitHub Actions 把"未配置的 secret"渲染成空字符串环境变量、
+    导致 os.getenv(name, default) 的默认值不生效的问题。
+    """
+    v = os.getenv(name)
+    if v is None or v.strip() == "":
+        return default
+    return v
+
+
 def main():
     parser = argparse.ArgumentParser(description="界面新闻快报每日简报")
     parser.add_argument("--dry-run", action="store_true", help="只打印简报，不推送")
@@ -306,10 +318,10 @@ def main():
 
     dry_run = args.dry_run or os.getenv("DRY_RUN") == "1"
 
-    tz_offset = int(os.getenv("TIMEZONE_OFFSET", "8"))
+    tz_offset = int(_getenv("TIMEZONE_OFFSET", "8"))
     tz = datetime.timezone(datetime.timedelta(hours=tz_offset))
-    max_items = int(os.getenv("MAX_ITEMS", "15"))
-    today_only = os.getenv("TODAY_ONLY", "1") != "0"
+    max_items = int(_getenv("MAX_ITEMS", "15"))
+    today_only = _getenv("TODAY_ONLY", "1") != "0"
 
     print(f"[info] 解析分类链接 ...", file=sys.stderr)
     urls = resolve_category_urls()
