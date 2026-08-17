@@ -92,3 +92,29 @@ python news_brief.py
 - **抓不到新闻？** 界面可能对频繁请求做限制，GitHub Actions 的 IP 段通常没问题；本地测试可加 `DRY_RUN=1` 看是否有报错。
 - **想加更多栏目？** 编辑 `news_brief.py` 顶部的 `CATEGORY_URLS`（以及 `resolve_category_urls` 里的匹配名）即可。
 - **推送失败？** 检查对应 token 是否正确、推送服务是否额度用尽（免费版一般有每日条数限制）。
+
+## 对话模式（chat）：接入微信助手随问随答
+
+除了定时推送，你也可以让对话助手（如 OpenClaw 部署的「悟空」）在微信里被问到「今日简报」时，
+实时抓取并回复。该模式**只输出文本、不推送、也不写去重状态**，与定时链路完全隔离。
+
+```bash
+python news_brief.py --chat            # 精简版：标题 + 链接（自动按 ~1700 字/条分块）
+python news_brief.py --chat --detail   # 详细版：标题 + 时间 + 摘要(截断180字) + 链接
+python news_brief.py --chat --json      # JSON 输出 {"messages":[...]}，便于程序逐条发送
+```
+
+- 普通文本模式：多条消息之间以 `§§§SPLIT§§§` 分隔，调用方程序按此切分后逐条发送微信。
+- JSON 模式：直接 `json.loads` 得到 `messages` 数组，遍历逐条发送，最便于自动化接线。
+- 微信单条约 2000 中文字上限，脚本已自动分块，调用方无需再处理长度。
+
+### 在 OpenClaw 等助手里接线（示意）
+
+让助手识别到用户消息含「今日简报」时，执行：
+
+```bash
+python /path/to/news_brief.py --chat --json
+```
+
+读取 stdout 的 JSON `messages` 数组，逐条调用助手的「主动发送消息」能力发给用户即可。
+想要带摘要的版本，把 `--json` 换成 `--detail --json`。
