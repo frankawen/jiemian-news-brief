@@ -26,6 +26,7 @@
 
 import os
 import sys
+import json
 import argparse
 import datetime
 import html
@@ -277,6 +278,27 @@ def _check(resp, name: str) -> bool:
 # 主流程
 # ---------------------------------------------------------------------------
 
+def load_state() -> dict:
+    """读取已推送状态，用于 17:00 对 8:00 去重。"""
+    path = os.getenv("STATE_FILE", ".state/pushed_ids.json")
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:  # noqa: BLE001
+        return {}
+
+
+def save_state(state: dict) -> None:
+    """写回去重状态文件（由 GitHub Actions 提交回仓库，以便跨次运行保留）。"""
+    path = os.getenv("STATE_FILE", ".state/pushed_ids.json")
+    try:
+        os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(state, f, ensure_ascii=False, indent=2)
+    except Exception as e:  # noqa: BLE001
+        print(f"[warn] 写入去重状态失败：{e}", file=sys.stderr)
+
+
 def main():
     parser = argparse.ArgumentParser(description="界面新闻快报每日简报")
     parser.add_argument("--dry-run", action="store_true", help="只打印简报，不推送")
@@ -293,24 +315,51 @@ def main():
     urls = resolve_category_urls()
 
     categories: Dict[str, List[NewsItem]] = {}
+    all_items: List[tuple] = []
     for name, url in urls.items():
         print(f"[info] 抓取「{name}」：{url}", file=sys.stderr)
         items = fetch_category(name, url)
         items = filter_today(items, tz, today_only)
         items = items[:max_items]
         categories[name] = items
+        for it in items:
+            all_items.append((name, it))
         print(f"[info] 「{name}」拿到 {len(items)} 条", file=sys.stderr)
 
-    html_doc, text_doc = build_brief(categories, tz)
+    # ---- 跨日去重：每天首次运行(8:00)全量；同日后续运行(17:00)剔除已推送 ----
+    today_str = datetime.datetime.now(tz).strftime("%Y-%m-%d")
+    state = load_state()
+    already = set(state.get("ids", [])) if state.get("date") == today_str else set()
+
+    pushed_categories: Dict[str, List[NewsItem]] = {name: [] for name in categories}
+    pushed_ids: List[str] = []
+    seen_urls: set = set()
+    for name, it in all_items:
+        if it.url in seen_urls:
+            continue
+        seen_urls.add(it.url)
+        if it.url in already:
+            continue
+        pushed_categories[name].append(it)
+        pushed_ids.append(it.url)
+
+    if not any(pushed_categories.values()):
+        print("[info] 本次无新增快讯（17:00 与 8:00 无重复新增），跳过推送。", file=sys.stderr)
+        return
+
+    html_doc, text_doc = build_brief(pushed_categories, tz)
 
     if dry_run:
         print("\n" + "=" * 60)
         print(text_doc)
         print("=" * 60)
-        print("\n[info] DRY_RUN 模式，未推送。", file=sys.stderr)
+        print("\n[info] DRY_RUN 模式，未推送（也未写入去重状态）。", file=sys.stderr)
         return
 
     ok = push(html_doc, text_doc)
+    if ok:
+        save_state({"date": today_str, "ids": list(already | set(pushed_ids))})
+        print(f"[info] 已记录本次推送 {len(pushed_ids)} 条，供 17:00 去重。", file=sys.stderr)
     sys.exit(0 if ok else 1)
 
 
