@@ -13,6 +13,11 @@
   DRY_RUN=1 python news_brief.py       # 只打印简报，不推送
   python news_brief.py --help          # 查看参数
 
+  # 对话模式（供 OpenClaw / 微信助手随问随答，不推送、不写去重状态）
+  python news_brief.py --chat            # 精简版：标题 + 链接（一条尽量装下）
+  python news_brief.py --chat --detail   # 详细版：标题 + 时间 + 摘要(截断) + 链接
+  python news_brief.py --chat --json     # 以 JSON {"messages":[...]} 输出，便于程序逐条发送
+
 环境变量（详见 README.md）：
   PUSH_METHOD       pushplus | serverchan | wecom   (默认 pushplus)
   PUSHPLUS_TOKEN    pushplus 的 token
@@ -254,6 +259,77 @@ def build_brief(categories: Dict[str, List[NewsItem]], tz: datetime.timezone) ->
 
 
 # ---------------------------------------------------------------------------
+# 对话模式（chat）：供 OpenClaw 等对话助手随问随答使用
+# ---------------------------------------------------------------------------
+
+# 多块消息之间的分隔符（程序按此切分多条微信消息）
+CHAT_SPLIT = "\n\n§§§SPLIT§§§\n\n"
+
+
+def _short(s: str, n: int = 180) -> str:
+    s = (s or "").replace("\n", " ").strip()
+    return s if len(s) <= n else s[: max(n - 1, 1)] + "…"
+
+
+def build_chat_text(
+    categories: Dict[str, List[NewsItem]], tz: datetime.timezone, detail: bool = False
+) -> str:
+    """生成对话助手可直接作为回复的文本。
+
+    - 精简版（detail=False）：标题 + 链接，一条消息尽量装下。
+    - 详细版（detail=True）：标题 + 时间 + 摘要(截断180字) + 链接（Markdown 友好）。
+    均不推送、不写去重状态（与定时推送链路完全隔离）。
+    """
+    now = datetime.datetime.now(tz)
+    date_str = now.strftime("%Y年%m月%d日 %H:%M")
+    weekday = "一二三四五六日"[now.weekday()]
+    total = sum(len(v) for v in categories.values())
+
+    head = f"📰 界面新闻·每日快报\n🕐 {date_str} 星期{weekday} ｜ 共 {total} 条"
+    blocks = [head]
+    for name, items in categories.items():
+        lines = [f"\n【{name}】（{len(items)} 条）"]
+        if not items:
+            lines.append("  今日暂无更新")
+            blocks.append("\n".join(lines))
+            continue
+        for i, it in enumerate(items, 1):
+            if detail:
+                line = f"**{i}. [{it.title}]({it.url})**"
+                if it.time_text:
+                    line += f"\n⏰ {it.time_text}"
+                if it.summary:
+                    line += f"\n📝 {_short(it.summary)}"
+                line += f"\n🔗 [阅读原文]({it.url})"
+            else:
+                line = f"{i}. {it.title}\n   {it.url}"
+            lines.append(line)
+        blocks.append("\n".join(lines))
+    return "\n".join(blocks)
+
+
+def split_chat(text: str, limit: int = 1700) -> List[str]:
+    """按行切分，尽量不切断单条新闻，返回多条消息文本。
+
+    limit 为单条微信消息的字数上限（约 2000 中文字，留余量）。
+    """
+    lines = text.split("\n")
+    chunks: List[str] = []
+    cur: List[str] = []
+    cur_len = 0
+    for ln in lines:
+        if cur and cur_len + len(ln) + 1 > limit:
+            chunks.append("\n".join(cur))
+            cur = []
+            cur_len = 0
+        cur.append(ln)
+        cur_len += len(ln) + 1
+    if cur:
+        chunks.append("\n".join(cur))
+    return chunks or [text]
+
+
+# ---------------------------------------------------------------------------
 # 微信推送
 # ---------------------------------------------------------------------------
 
@@ -357,6 +433,21 @@ def _getenv(name: str, default: str) -> str:
 def main():
     parser = argparse.ArgumentParser(description="界面新闻快报每日简报")
     parser.add_argument("--dry-run", action="store_true", help="只打印简报，不推送")
+    parser.add_argument(
+        "--chat",
+        action="store_true",
+        help="对话模式：输出可直接回复的简报文本（不推送、不写去重状态），配合 OpenClaw 等对话助手使用",
+    )
+    parser.add_argument(
+        "--detail",
+        action="store_true",
+        help="对话模式输出详细版（含摘要）；默认精简版（仅标题+链接）",
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="对话模式以 JSON 输出 {\"messages\":[...]}，便于程序逐条发送",
+    )
     args = parser.parse_args()
 
     dry_run = args.dry_run or os.getenv("DRY_RUN") == "1"
@@ -380,6 +471,16 @@ def main():
         for it in items:
             all_items.append((name, it))
         print(f"[info] 「{name}」拿到 {len(items)} 条", file=sys.stderr)
+
+    # ---- 对话模式（chat）：仅输出文本，不推送、不写去重状态 ----
+    if args.chat:
+        text = build_chat_text(categories, tz, detail=args.detail)
+        chunks = split_chat(text)
+        if args.json:
+            print(json.dumps({"messages": chunks}, ensure_ascii=False))
+        else:
+            print(CHAT_SPLIT.join(chunks))
+        return
 
     # ---- 跨日去重：每天首次运行(8:00)全量；同日后续运行(17:00)剔除已推送 ----
     today_str = datetime.datetime.now(tz).strftime("%Y-%m-%d")
