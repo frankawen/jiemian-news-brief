@@ -1,0 +1,55 @@
+name: 界面新闻每日快报
+
+on:
+  schedule:
+    # 北京时间 08:00（UTC+8）= 00:00 UTC。GitHub Actions 的 cron 为 UTC。
+    - cron: "0 0 * * *"
+    # 北京时间 17:00 = 09:00 UTC；17:00 仅推送 8:00 之后新增的（脚本内部按已推送 ID 去重）。
+    - cron: "0 9 * * *"
+  workflow_dispatch: {}   # 允许在 Actions 页面手动触发
+
+permissions:
+  contents: write        # 需写回去重状态文件 .state/pushed_ids.json
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 配置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 抓取并推送每日简报
+        env:
+          PUSH_METHOD: ${{ secrets.PUSH_METHOD }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          SERVERCHAN_KEY: ${{ secrets.SERVERCHAN_KEY }}
+          WECOM_KEY: ${{ secrets.WECOM_KEY }}
+          MAX_ITEMS: ${{ secrets.MAX_ITEMS }}
+          TODAY_ONLY: ${{ secrets.TODAY_ONLY }}
+          TIMEZONE_OFFSET: ${{ secrets.TIMEZONE_OFFSET }}
+        run: python news_brief.py
+
+      - name: 保存去重状态（供 17:00 对 8:00 去重）
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/frankawen/jiemian-news-brief.git"
+          git add .state/pushed_ids.json
+          if git diff --cached --quiet; then
+            echo "去重状态无变化，跳过提交"
+          else
+            git commit -m "chore: 更新已推送状态 [skip ci]"
+            git push
+          fi
