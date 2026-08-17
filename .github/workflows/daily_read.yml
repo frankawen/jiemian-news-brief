@@ -1,0 +1,48 @@
+name: 每日一读 + 词语库
+
+on:
+  schedule:
+    # 每 3 小时跑一次，对齐北京整点（UTC+8 的 0/3/6/9/12/15/18/21 点）
+    # 对应 UTC 的 16,19,22,1,4,7,10,13 点
+    - cron: "0 16,19,22,1,4,7,10,13 * * *"
+  workflow_dispatch: {}   # 允许在 Actions 页面手动触发
+
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 配置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 生成 每日一读（人民日报评论 + 学习强国种子）
+        run: python daily_read.py
+
+      - name: 生成 词语库（hitokoto 公开接口 enrich）
+        run: python words.py
+
+      - name: 提交 JSON 产物
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/frankawen/jiemian-news-brief.git"
+          git add daily_read.json words.json xuexi_seed.json
+          if git diff --cached --quiet; then
+            echo "无变化，跳过提交"
+          else
+            git commit -m "chore: 更新每日一读与词语库 [skip ci]"
+            git push
+          fi
