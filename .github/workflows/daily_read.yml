@@ -2,9 +2,11 @@ name: 每日一读 + 词语库
 
 on:
   schedule:
-    # 每 3 小时跑一次，对齐北京整点（UTC+8 的 0/3/6/9/12/15/18/21 点）
-    # 对应 UTC 的 16,19,22,1,4,7,10,13 点
-    - cron: "0 16,19,22,1,4,7,10,13 * * *"
+    # 每 3 小时跑一次，比 daily.yml 错开 1 小时（北京 1/4/7/10/13/16/19/22 点）
+    # 对应 UTC 的 17,20,23,2,5,8,11,14 点
+    # 错峰原因：与「界面新闻每日快报」共用整点 cron 时，GitHub Actions 高峰期
+    #           常丢轮 + 双 workflow 同时 push 互相冲突，导致 words.json 停更
+    - cron: "0 17,20,23,2,5,8,11,14 * * *"
   workflow_dispatch: {}   # 允许在 Actions 页面手动触发
 
 permissions:
@@ -19,6 +21,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          # 全量历史：保证下方 pull --rebase 在并发推送后仍能找到共同祖先
+          fetch-depth: 0
 
       - name: 配置 Python
         uses: actions/setup-python@v5
@@ -34,7 +38,7 @@ jobs:
       - name: 生成 词语库（头条搜索「暖心祝福」enrich）
         run: python words.py
 
-      - name: 提交 JSON 产物
+      - name: 提交 JSON 产物（rebase 重试，避免与另一 workflow 的 push 冲突）
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -42,7 +46,18 @@ jobs:
           git add daily_read.json words.json xuexi_seed.json
           if git diff --cached --quiet; then
             echo "无变化，跳过提交"
-          else
-            git commit -m "chore: 更新每日一读与词语库 [skip ci]"
-            git push
+            exit 0
           fi
+          git commit -m "chore: 更新每日一读与词语库 [skip ci]"
+          # 先 rebase 到远端最新再推，失败重试最多 3 次（间隔 15s），
+          # 消除与 daily.yml 并发 push 时的 non-fast-forward 冲突
+          for i in 1 2 3; do
+            if git pull --rebase origin main && git push; then
+              echo "push 成功（第 $i 次尝试）"
+              exit 0
+            fi
+            echo "push 失败，${i}0 秒后重试…"
+            sleep 15
+          done
+          echo "::error::推送重试 3 次仍失败，请检查 Actions 日志"
+          exit 1
