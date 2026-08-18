@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-19T04:10:56+08:00",
+  "updated_at": "2026-08-19T07:11:46+08:00",
   "date": "2026-08-19",
   "sections": {
     "shijing": {
@@ -11,11 +11,11 @@
       "note": "译文/注释/赏析为 guwendao 反爬动态加载，需前往原文页查看。"
     },
     "mingju": {
-      "title": "夜玉含星动，晨毡映雪开。",
-      "yiwen": "洁白的羊群好似星夜下闪动的明珠，雪白的素毡映衬着飞雪。",
-      "zhushi": "夜玉：夜明珠，比喻白羊。毡：羊毛。",
-      "shangxi": "此句以“夜玉”拟月华含星辉流转之态，“晨毡”喻雪野铺展之景，时空交叠间尽显昼夜光影变幻的清丽与灵动。",
-      "url": "https://www.gushiwen.cn/mingju/juv_f0e194f8c43c.aspx",
+      "title": "禽鸟声中闻自性，方知情识是戈矛。",
+      "yiwen": "在鸟鸣声中觉察到原本的性情，才知道才情和见识原来是攻击人的武器。",
+      "zhushi": "自性：原本的性情。情识：才情和见识。",
+      "shangxi": "此句以“禽鸟声中闻自性”开篇，点出在自然天籁中才能听见内心本真的声音；而后半句“方知情识是戈矛”则陡然转折，醒悟到平日依赖的才情和见识原来如同伤人的兵器。",
+      "url": "https://www.gushiwen.cn/mingju/juv_8de84c604b0e.aspx",
       "source": "gushiwen.cn 名句"
     },
     "xuexi": {
@@ -36,27 +36,27 @@
     },
     "rmrb": {
       "title": "人民日报 · 05版 评论",
-      "date": "2026-08-18",
+      "date": "2026-08-19",
       "items": [
         {
-          "title": "以法为纲护山河（连线评论员）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/18/content_30175587.html"
+          "title": "“心中有数、手中有策、行动有力”（评论员观察）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175787.html"
         },
         {
-          "title": "经得住“火眼金睛”（中国道路中国梦·每一个人都是主角）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/18/content_30175588.html"
+          "title": "告别铺摊子，转身上台阶（现场评论）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175788.html"
         },
         {
-          "title": "“走出大山”何以不再沉重（暖闻热评）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/18/content_30175589.html"
+          "title": "“碳尽其用”有深意（新知）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175789.html"
         },
         {
-          "title": "城市治理要接得住群众参与（纵横）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/18/content_30175591.html"
+          "title": "“不比家底比家风”（纵横）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175790.html"
         },
         {
-          "title": "“两个80%”的警示",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/18/content_30175592.html"
+          "title": "找准生态产业发展的燃点（治理者说）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175792.html"
         }
       ]
     }
