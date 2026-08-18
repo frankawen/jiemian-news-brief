@@ -1,7 +1,48 @@
 {
   "title": "学习强国 · 每日一读",
-  "date": "",
+  "date": "2026-08-18",
   "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E6%AF%8F%E6%97%A5%E4%B8%80%E8%AF%BB&page=1&search_source=1&program_id=0&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D&_t=1787019679134",
-  "paragraphs": [],
-  "note": "学习强国搜索结果走签名网关 + JS 渲染（iframe 动态加载），服务端无法自动抓取标题与简介。已更新为「每日一读」搜索页链接，可点击前往官网阅读。若要在模块内展示真实标题+简介，请将当日内容粘贴到 paragraphs 数组（每项一段），或在工作台「每日一读」模块内直接粘贴。"
+  "items": [
+    {
+      "title": "智圆行方",
+      "summary": "心不细，则为粗鲁之徒，亦败事之端也。囿者，周密也，智不圆，则纵漏丛出。所谓\"行成于思，毁于随\"。为人行事，行不方，则无以立身显名，甚则阡诈油滑，邪恶心人也。",
+      "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E6%99%BA%E5%9C%86%E8%A1%8C%E6%96%B9&page=1&search_source=1&program_id=1&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D",
+      "date": "2026-08-18",
+      "channel": "每日一读",
+      "source": "《读者》"
+    },
+    {
+      "title": "放逐情绪",
+      "summary": "发现一颗曾经沧海的心，梳理得那么通顺。她的日记是表格式的，格式的限制使她圈去了所有废话。在日期、天气栏的后面，逐一枚着户外活动、读书看报、来信来客、娱乐、健康……值得一掩的是最后那一栏：情绪。有一天她在那一栏里写着\"高兴，感觉时间不够用\"……",
+      "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E6%94%BE%E9%80%90%E6%83%85%E7%BB%AA&page=1&search_source=1&program_id=1&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D",
+      "date": "2026-08-17",
+      "channel": "每日一读",
+      "source": "《读者》"
+    },
+    {
+      "title": "一棵树",
+      "summary": "伴随它的只有影子。黄昏里拉得长长的影子，如炭精条在白卡纸上重涂的一道黑线。在草原上走，看到远方有一棵树，你会觉得树正朝这边张望。它矮矮的身墩上穿着一件绿雨衣，朝这边看，人会冒出一个念头，跑过去，跑到树旁，摸一摸这棵树。走近了，……",
+      "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E4%B8%80%E6%A3%B5%E6%A0%91&page=1&search_source=1&program_id=1&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D",
+      "date": "2026-08-15",
+      "channel": "每日一读",
+      "source": "《读者》"
+    },
+    {
+      "title": "人为什么喜欢组饭局",
+      "summary": "所以你只要有宴可赴，就已经活得很人模人样了。饭局的核心理要素不一定是吃，而是聊。\"幼小的猴子需要它母亲作母亲的教。素不相识的进餐者面对面围坐在餐桌旁，这种场面会令许多动物感到对持的威胁。人类却能友好地传递一盘又一盘食物，……",
+      "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E5%96%9C%E6%AC%A2%E7%BB%84%E9%A5%AD%E5%B1%80&page=1&search_source=1&program_id=1&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D",
+      "date": "2026-08-14",
+      "channel": "每日一读",
+      "source": "《读者》"
+    },
+    {
+      "title": "神奇的服章",
+      "summary": "（来源：《读者》每日一读栏目 2026-08-13 推送；完整内容请点击下方链接前往学习强国阅读。）",
+      "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E7%A5%9E%E5%A5%87%E7%9A%84%E6%9C%8D%E7%AB%A0&page=1&search_source=1&program_id=1&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D",
+      "date": "2026-08-13",
+      "channel": "每日一读",
+      "source": "《读者》"
+    }
+  ],
+  "note": "学习强国「每日一读」频道内容（来自《读者》杂志）。沙箱 / GitHub Actions 无登录态无法直接抓到 API 内容，故先以悟空手工维护 seed 为主——每日一读更新时由用户或悟空把最新 5 篇粘进 items。如要自动抓取，需在 PC 端登录态下跑 fetch_xuexi_search()。"
 }
