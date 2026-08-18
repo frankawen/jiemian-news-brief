@@ -4,8 +4,10 @@
 
 两大来源：
   1) 人民日报 05版「评论」——每天自动抓取（按日期回溯，取最近一个有文章的日期）。
-  2) 学习强国「每日一读」——文章走签名网关，服务端无法自动抓取，改为读取仓库内
-     xuexi_seed.json（由用户/助手补充），或在工作台模块内直接粘贴。
+  2) 学习强国「每日一读」——搜索结果走签名网关 + JS 渲染（iframe 动态加载），
+     服务端（沙箱 / GitHub Actions）均无法直接抓取标题与简介。因此保留「链接跳转」
+     卡片，链接指向用户提供的「每日一读」搜索页；若要展示真实标题+简介，需每日将
+     内容粘贴进 xuexi_seed.json 的 paragraphs（或工作台模块内直接粘贴）。
 """
 import os
 import json
@@ -21,8 +23,16 @@ HEADERS = {
     "Referer": "https://paper.people.com.cn/",
 }
 
-# 学习强国「每日一读」落地页（服务端无法抓正文，至少提取链接供跳转）
-XUEXI_URL = "https://www.xuexi.cn/lgpage/detail/index.html?id=5013135349301165191&item_id=5013135349301165191"
+# 学习强国「每日一读」搜索页（签名网关 + JS 渲染，服务端无法抓正文/简介，
+# 仅保留链接供跳转）。链接为用户提供的「每日一读」搜索结果页。
+XUEXI_URL = (
+    "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/"
+    "9a75e290b9cf8cb8fb529a6e503db78d.html"
+    "?query=%E6%AF%8F%E6%97%A5%E4%B8%80%E8%AF%BB&page=1&search_source=1"
+    "&program_id=0&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter"
+    "%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method"
+    "%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D&_t=1787019679134"
+)
 
 
 def now_beijing():

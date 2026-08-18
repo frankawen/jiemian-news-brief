@@ -258,6 +258,31 @@ def build_brief(categories: Dict[str, List[NewsItem]], tz: datetime.timezone) ->
     return html_doc, text_doc
 
 
+def build_placeholder_brief(tz: datetime.timezone) -> (str, str):
+    """今日无新快讯时，生成一条占位提醒（html, text）。
+
+    保证「每天至少收到一条」：有真新闻的当天不会再补发占位，避免误导；
+    全天都无新快讯时，仅首次运行推送一次占位提醒。
+    """
+    now = datetime.datetime.now(tz)
+    date_str = now.strftime("%Y年%m月%d日 %H:%M")
+    weekday = "一二三四五六日"[now.weekday()]
+
+    html_doc = (
+        "<h1 style='margin:0 0 6px 0;color:#222;'>📰 界面新闻 · 每日快报</h1>"
+        f"<p style='color:#888;font-size:13px;margin:0 0 6px 0;'>"
+        f"🕐 {date_str} 星期{weekday}</p>"
+        "<p style='color:#555;font-size:14px;margin:10px 0;'>"
+        "🌙 今日（截至当前扫描）暂无新的快讯更新。如有重大突发，将自动推送。</p>"
+    )
+    text_doc = (
+        "# 📰 界面新闻 · 每日快报\n\n"
+        f"🕐 {date_str} 星期{weekday}\n\n"
+        "---\n\n🌙 今日（截至当前扫描）暂无新的快讯更新。如有重大突发，将自动推送。"
+    )
+    return html_doc, text_doc
+
+
 # ---------------------------------------------------------------------------
 # 对话模式（chat）：供 OpenClaw 等对话助手随问随答使用
 # ---------------------------------------------------------------------------
@@ -535,8 +560,30 @@ def main():
         pushed_ids.append(it.url)
 
     if not any(pushed_categories.values()):
-        print("[info] 本次无新增快讯（17:00 与 8:00 无重复新增），跳过推送。", file=sys.stderr)
-        return
+        # 空跑兜底：当天尚未发送过占位提醒时，推送一条「今日暂无新快讯」。
+        # 有真新闻的当天不会再补发占位（见下方 save_state 写入 placeholder_sent）；
+        # 全天无新快讯时，仅首次运行推送一次，避免重复打扰。
+        placeholder_sent_today = (
+            state.get("date") == today_str and state.get("placeholder_sent")
+        )
+        if placeholder_sent_today:
+            print(
+                "[info] 本次无新增快讯，且今日占位提醒已发送，跳过推送。",
+                file=sys.stderr,
+            )
+            return
+        phtml, ptext = build_placeholder_brief(tz)
+        if dry_run:
+            print("\n" + "=" * 60)
+            print(ptext)
+            print("=" * 60)
+            print("\n[info] DRY_RUN 模式（占位提醒），未推送。", file=sys.stderr)
+            return
+        ok = push(phtml, ptext)
+        if ok:
+            save_state({"date": today_str, "ids": list(already), "placeholder_sent": True})
+            print("[info] 今日无新快讯，已推送占位提醒。", file=sys.stderr)
+        sys.exit(0 if ok else 1)
 
     html_doc, text_doc = build_brief(pushed_categories, tz)
 
@@ -549,8 +596,14 @@ def main():
 
     ok = push(html_doc, text_doc)
     if ok:
-        save_state({"date": today_str, "ids": list(already | set(pushed_ids))})
-        print(f"[info] 已记录本次推送 {len(pushed_ids)} 条，供 17:00 去重。", file=sys.stderr)
+        save_state(
+            {
+                "date": today_str,
+                "ids": list(already | set(pushed_ids)),
+                "placeholder_sent": True,
+            }
+        )
+        print(f"[info] 已记录本次推送 {len(pushed_ids)} 条，供去重。", file=sys.stderr)
     sys.exit(0 if ok else 1)
 
 

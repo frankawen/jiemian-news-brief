@@ -1,37 +1,37 @@
 {
-  "updated_at": "2026-08-17T18:12:20+08:00",
+  "updated_at": "2026-08-18T10:49:51+08:00",
   "source": "每日一读（人民日报评论 + 学习强国）",
   "sections": {
     "xuexi": {
       "title": "学习强国 · 每日一读",
       "date": "",
-      "url": "https://www.xuexi.cn/lgpage/detail/index.html?id=5013135349301165191&item_id=5013135349301165191",
+      "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E6%AF%8F%E6%97%A5%E4%B8%80%E8%AF%BB&page=1&search_source=1&program_id=0&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D&_t=1787019679134",
       "paragraphs": [],
-      "note": "学习强国文章走签名网关，服务端无法自动抓取正文；已提取文章链接，可点击前往官网阅读。也可将当日文字粘贴到 paragraphs 数组（每项一段），或在工作台「每日一读」模块内直接粘贴。"
+      "note": "学习强国搜索结果走签名网关 + JS 渲染（iframe 动态加载），服务端无法自动抓取标题与简介。已更新为「每日一读」搜索页链接，可点击前往官网阅读。若要在模块内展示真实标题+简介，请将当日内容粘贴到 paragraphs 数组（每项一段），或在工作台「每日一读」模块内直接粘贴。"
     },
     "rmrb": {
       "title": "人民日报 · 05版 评论",
-      "date": "2026-08-17",
+      "date": "2026-08-18",
       "items": [
         {
-          "title": "练好“钉钉子”的功夫（评论员观察）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/17/content_30175302.html"
+          "title": "以法为纲护山河（连线评论员）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/18/content_30175587.html"
         },
         {
-          "title": "从“种子破土”到“成木成林”（现场评论）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/17/content_30175303.html"
+          "title": "经得住“火眼金睛”（中国道路中国梦·每一个人都是主角）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/18/content_30175588.html"
         },
         {
-          "title": "产业发展如何各得其所（微观）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/17/content_30175304.html"
+          "title": "“走出大山”何以不再沉重（暖闻热评）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/18/content_30175589.html"
         },
         {
-          "title": "让“边角”成为治理“金名片”（纵横）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/17/content_30175306.html"
+          "title": "城市治理要接得住群众参与（纵横）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/18/content_30175591.html"
         },
         {
-          "title": "凡人叙事何以打动人心",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/17/content_30175307.html"
+          "title": "“两个80%”的警示",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/18/content_30175592.html"
         }
       ]
     }
