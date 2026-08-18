@@ -36,15 +36,17 @@ HEADERS = {
 SHIJING_INDEX_URL = "https://www.gushiwen.cn/gushi/shijing.aspx"
 # 名句列表页
 MINGJU_INDEX_URL = "https://www.gushiwen.cn/mingjus/"
-# 学习强国「每日一读」搜索页（签名网关 + JS 渲染，服务端无法抓正文/简介，仅保留链接）
-XUEXI_URL = (
-    "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/"
-    "9a75e290b9cf8cb8fb529a6e503db78d.html"
-    "?query=%E6%AF%8F%E6%97%A5%E4%B8%80%E8%AF%BB&page=1&search_source=1"
-    "&program_id=0&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter"
-    "%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method"
-    "%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D&_t=1787019679134"
+# 学习强国「每日一读」专题（公开 SPA，未登录可点开文章但服务端反爬抓不到列表/正文）
+# 整页 tabs（今晚陪你听/特别策划/我说"学习强国"/熊猫什么都知道/倾听/每日一读）
+# 中只有「每日一读」是公开可访问的；其他 tab 需要登录。
+XUEXI_TOPIC_URL = (
+    "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure"
+    "&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0"
+    "&related_id=14122703379888049123&related_type=1&study_comment_disable=0"
+    "&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236"
 )
+# 兼容旧引用
+XUEXI_URL = XUEXI_TOPIC_URL
 # 每日口才 · 小红书博主主页（图片分享，需登录态；服务端 API 返回 500，降级为深链）
 KOUCAL_URL = (
     "https://www.xiaohongshu.com/user/profile/65b8f780000000000d01ee44"
@@ -247,152 +249,25 @@ def fetch_mingju_detail(path):
 
 
 # --------------------------------------------------------------------------- #
-# 3) 学习强国 · 每日一读
+# 3) 学习强国 · 每日一读（公开 SPA 专题页，只展示 2 篇文章）
 # --------------------------------------------------------------------------- #
-def fetch_xuexi_search():
-    """调 learning强国 wenhui 搜索 API 拿「每日一读」前 5 条。
+def fetch_xuexi_dailyread():
+    """学习强国「每日一读」tab：服务端 API 全部反爬（search.xuexi.cn 需签名、article.xuexi.cn
+    未登录 SSR 返兜底 HTML、lgdata 老接口又 GBK 编码 + 找不到本专题 ID），因此按师父要求改为
+    「纯跳转链接」——只给出专题页链接，用户自行点击在浏览器打开阅读。
 
-    完整 PC 端 jQuery ajax 协议（来自 static.xuexi.cn/search/online 的 JS bundle）：
-      endpoint: https://search.xuexi.cn/api/search
-      query (必填): query, page=1, size=15, hid=<32位>, client_version=PC:0.0.10,
-                    search_source=2, program_id=1, product=wenhui_search,
-                    product_params=<URL-encoded JSON>, _t=<毫秒时间戳>
-    响应字段路径: data.list[i].cardSchema.renderData.{title, summary, url, publish_time}
-                  + data.list[i].cardSchema.renderData.ext_infos[0].title (频道标签)
-
-    Returns: list[dict] 每条 {title, summary, url, date, channel}，至多 5 条；失败返回 []
+    Returns: dict {title, date, topic_url, url, items:[], source, note}
     """
-    import time as _t
-    import random as _r
-    import string as _s
-
-    hid = "".join(_r.choices(_s.ascii_letters + _s.digits, k=32))
-    pp = json.dumps(
-        {
-            "time_filter": "all",
-            "type_filter": "all",
-            "sort_method": "integrated",
-            "wenhui_sort_method": "near_far",
-            "search_method": "all",
-        },
-        ensure_ascii=False,
-    )
-    pp_enc = urllib.parse.quote(pp)
-    q = urllib.parse.quote("每日一读")
-
-    base = {
-        "query": q,
-        "page": "1",
-        "size": "15",
-        "hid": hid,
-        "client_version": "PC:0.0.10",
-        "search_source": "2",
-        "program_id": "1",
-        "product": "wenhui_search",
-        "product_params": pp_enc,
-        "_t": str(int(_t.time() * 1000)),
-    }
-    url = "https://search.xuexi.cn/api/search?" + urllib.parse.urlencode(base)
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
-        "Referer": "https://www.xuexi.cn/",
-        "Origin": "https://www.xuexi.cn",
-        "Accept": "application/json, text/plain, */*",
-    }
-    for attempt in range(3):
-        try:
-            body = http_get(url, referer="https://www.xuexi.cn/", timeout=20)
-            if not body:
-                continue
-            d = json.loads(body)
-            if d.get("status") != 0:
-                continue
-            lst = (d.get("data") or {}).get("list") or []
-            out = []
-            for it in lst:
-                cs = (it.get("cardSchema") or {})
-                rd = (cs.get("renderData") or {})
-                ext_list = rd.get("ext_infos") or []
-                ext = ext_list[0] if ext_list else {}
-                title = (rd.get("title") or "").strip()
-                summary = (rd.get("summary") or "").strip()
-                u = (rd.get("url") or "").strip().replace("&amp;", "&")
-                pub = (rd.get("publish_time") or "").strip()
-                channel = (ext.get("title") or "").strip() if ext else ""
-                if not title and not summary:
-                    continue
-                out.append(
-                    {
-                        "title": title,
-                        "summary": summary,
-                        "url": u,
-                        "date": pub,
-                        "channel": channel,
-                    }
-                )
-                if len(out) >= 5:
-                    break
-            return out
-        except Exception as e:
-            print("xuexi search err (try %d):" % (attempt + 1), e)
-            _t.sleep(1.5 * (attempt + 1))
-    return []
-
-
-def load_xuexi_seed():
-    """学习强国每日一读：优先调官方 search API，失败则降级到仓库 xuexi_seed.json。"""
-    p = os.path.join(HERE, "xuexi_seed.json")
-    seed = None
-    if os.path.exists(p):
-        try:
-            seed = json.load(open(p, encoding="utf-8"))
-        except Exception as e:
-            print("xuexi seed read err:", e)
-
-    # 1) 调官方 search API
-    try:
-        items = fetch_xuexi_search()
-        if items:
-            return {
-                "title": "学习强国 · 每日一读",
-                "date": now_beijing().strftime("%Y-%m-%d"),
-                "url": XUEXI_URL,
-                "items": items,
-                "source": "learning强国 wenhui 搜索 API（search.xuexi.cn）",
-                "note": "通过 PC 端 jQuery ajax 完整参数实时抓取。",
-            }
-    except Exception as e:
-        print("xuexi api err:", e)
-
-    # 2) seed.json 兜底
-    if seed and seed.get("items"):
-        items = seed["items"]
-        return {
-            "title": seed.get("title", "学习强国 · 每日一读"),
-            "date": seed.get("date") or now_beijing().strftime("%Y-%m-%d"),
-            "url": seed.get("url") or XUEXI_URL,
-            "items": items,
-            "source": "xuexi_seed.json (悟空手工维护)",
-            "note": seed.get("note") or "API 暂未抓到「每日一读」频道（无登录态），展示 seed.json 中的真实文章。",
-        }
-    if seed and (seed.get("url") or seed.get("title")):
-        return {
-            "title": seed.get("title", "学习强国 · 每日一读"),
-            "date": seed.get("date", ""),
-            "url": seed.get("url", XUEXI_URL),
-            "items": [],
-            "source": "xuexi_seed.json (仅链接)",
-            "note": seed.get("note") or "学习强国搜索结果走签名网关 + JS 渲染，仅保留跳转链接。",
-        }
-
-    # 3) 已知链接兜底
+    today = now_beijing().strftime("%Y-%m-%d")
     return {
         "title": "学习强国 · 每日一读",
-        "date": "",
-        "url": XUEXI_URL,
+        "date": today,
+        "topic_id": "5427951075763236",
+        "topic_url": XUEXI_TOPIC_URL,
+        "url": XUEXI_TOPIC_URL,
         "items": [],
-        "source": "已知搜索页 URL",
-        "note": "学习强国文章走签名网关，服务端无法自动抓取正文；可点击前往官网阅读。",
+        "source": "学习强国专题页（纯跳转链接）",
+        "note": "「每日一读」服务端反爬抓不到内容，已改为单跳转链接，点按钮在浏览器打开即可阅读。",
     }
 
 
@@ -493,8 +368,8 @@ def main():
             "source": "gushiwen.cn 名句",
         }
 
-    # 3) 学习强国
-    xuexi = load_xuexi_seed()
+    # 3) 学习强国 · 每日一读（固定 2 篇文章种子）
+    xuexi = fetch_xuexi_dailyread()
     # 4) 口才
     koucai = fetch_koucai()
     # 兼容：人民日报
