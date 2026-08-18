@@ -31,7 +31,7 @@ jobs:
       - name: 生成 每日一读（人民日报评论 + 学习强国种子）
         run: python daily_read.py
 
-      - name: 生成 词语库（hitokoto 公开接口 enrich）
+      - name: 生成 词语库（头条搜索「暖心祝福」enrich）
         run: python words.py
 
       - name: 提交 JSON 产物
