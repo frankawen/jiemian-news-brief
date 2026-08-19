@@ -1,32 +1,73 @@
 {
-  "updated_at": "2026-08-19T09:26:18+08:00",
-  "date": "2026-08-19",
+  "updated_at": "2026-08-20T06:14:50+08:00",
+  "date": "2026-08-20",
   "sections": {
     "shijing": {
-      "title": "陟岵",
-      "category": "国风·魏风",
-      "original": "陟彼岵兮，瞻望父兮。父曰：嗟！予子行役，夙夜无已。上慎旃哉，犹来！无止！陟彼屺兮，瞻望母兮。母曰：嗟！予季行役，夙夜无寐。上慎旃哉，犹来！无弃！陟彼冈兮，瞻望兄兮。兄曰：嗟！予弟行役，夙夜必偕。上慎旃哉，犹来！无死！",
-      "url": "https://www.gushiwen.cn/shiwenv_6ed686e89556.aspx",
+      "title": "载驱",
+      "category": "国风·齐风",
+      "original": "载驱薄薄，簟茀朱鞹。鲁道有荡，齐子发夕。四骊济济，垂辔濔濔。鲁道有荡，齐子岂弟。汶水汤汤，行人彭彭。鲁道有荡，齐子翱翔。汶水滔滔，行人儦儦。鲁道有荡，齐子游遨。",
+      "url": "https://www.gushiwen.cn/shiwenv_7164c08b5c93.aspx",
       "source": "gushiwen.cn 诗经",
       "note": "译文/注释/赏析为 guwendao 反爬动态加载，需前往原文页查看。"
     },
     "mingju": {
-      "title": "龙蟠虎踞金陵郡，古来六代豪华盛。",
-      "yiwen": "钟山龙蟠，石头虎踞，金陵为东南形胜之地，三国时的吴国、东晋、宋、齐、梁、陈，先后六朝在此建都，豪华竟逐，盛极一时。",
-      "zhushi": "龙蟠虎踞：形容地势雄伟险要，今特指南京。",
-      "shangxi": "此句思接千载，写历史长河中的金陵，金陵群山屏障，大江横陈，六朝为帝王之宅，概述那一段灿烂辉煌的往事，以先声夺人。",
-      "url": "https://www.gushiwen.cn/mingju/juv_b8cdec3873ae.aspx",
+      "title": "胡风吹朔雪，千里度龙山。",
+      "yiwen": "胡地寒风裹挟着北方的瑞雪吹越龙山，落到帝都。",
+      "zhushi": "龙山：即逴龙山，因地处极北，天气严寒；后遂用为咏雪之典。",
+      "shangxi": "此处写远在北方的雪被胡地寒风吹越龙山，落到帝都所在。",
+      "url": "https://www.gushiwen.cn/mingju/juv_da600aac93bc.aspx",
       "source": "gushiwen.cn 名句"
     },
     "xuexi": {
       "title": "学习强国 · 每日一读",
-      "date": "2026-08-19",
+      "date": "2026-08-20",
       "topic_id": "5427951075763236",
       "topic_url": "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0&related_id=14122703379888049123&related_type=1&study_comment_disable=0&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236",
       "url": "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0&related_id=14122703379888049123&related_type=1&study_comment_disable=0&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236",
-      "items": [],
-      "source": "学习强国专题页（纯跳转链接）",
-      "note": "「每日一读」服务端反爬抓不到内容，已改为单跳转链接，点按钮在浏览器打开即可阅读。"
+      "items": [
+        {
+          "title": "智圆行方",
+          "summary": "心不细，则为粗鲁之徒，亦败事之端也。囿者，周密也，智不圆，则纵漏丛出。所谓\"行成于思，毁于随\"。为人行事，行不方，则无以立身显名，甚则阡诈油滑，邪恶心人也。",
+          "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E6%99%BA%E5%9C%86%E8%A1%8C%E6%96%B9&page=1&search_source=1&program_id=1&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D",
+          "date": "2026-08-18",
+          "channel": "每日一读",
+          "source": "《读者》"
+        },
+        {
+          "title": "放逐情绪",
+          "summary": "发现一颗曾经沧海的心，梳理得那么通顺。她的日记是表格式的，格式的限制使她圈去了所有废话。在日期、天气栏的后面，逐一枚着户外活动、读书看报、来信来客、娱乐、健康……值得一掩的是最后那一栏：情绪。有一天她在那一栏里写着\"高兴，感觉时间不够用\"……",
+          "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E6%94%BE%E9%80%90%E6%83%85%E7%BB%AA&page=1&search_source=1&program_id=1&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D",
+          "date": "2026-08-17",
+          "channel": "每日一读",
+          "source": "《读者》"
+        },
+        {
+          "title": "一棵树",
+          "summary": "伴随它的只有影子。黄昏里拉得长长的影子，如炭精条在白卡纸上重涂的一道黑线。在草原上走，看到远方有一棵树，你会觉得树正朝这边张望。它矮矮的身墩上穿着一件绿雨衣，朝这边看，人会冒出一个念头，跑过去，跑到树旁，摸一摸这棵树。走近了，……",
+          "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E4%B8%80%E6%A3%B5%E6%A0%91&page=1&search_source=1&program_id=1&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D",
+          "date": "2026-08-15",
+          "channel": "每日一读",
+          "source": "《读者》"
+        },
+        {
+          "title": "人为什么喜欢组饭局",
+          "summary": "所以你只要有宴可赴，就已经活得很人模人样了。饭局的核心理要素不一定是吃，而是聊。\"幼小的猴子需要它母亲作母亲的教。素不相识的进餐者面对面围坐在餐桌旁，这种场面会令许多动物感到对持的威胁。人类却能友好地传递一盘又一盘食物，……",
+          "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E4%BA%BA%E4%B8%BA%E4%BB%80%E4%B9%88%E5%96%9C%E6%AC%A2%E7%BB%84%E9%A5%AD%E5%B1%80&page=1&search_source=1&program_id=1&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D",
+          "date": "2026-08-14",
+          "channel": "每日一读",
+          "source": "《读者》"
+        },
+        {
+          "title": "神奇的服章",
+          "summary": "（来源：《读者》每日一读栏目 2026-08-13 推送；完整内容请点击下方链接前往学习强国阅读。）",
+          "url": "https://www.xuexi.cn/dc12897105c8c496d783c5e4d3b680a2/9a75e290b9cf8cb8fb529a6e503db78d.html?query=%E7%A5%9E%E5%A5%87%E7%9A%84%E6%9C%8D%E7%AB%A0&page=1&search_source=1&program_id=1&product_params=%7B%22time_filter%22%3A%22all%22%2C%22type_filter%22%3A%22all%22%2C%22sort_method%22%3A%22integrated%22%2C%22wenhui_sort_method%22%3A%22near_far%22%2C%22search_method%22%3A%22all%22%7D",
+          "date": "2026-08-13",
+          "channel": "每日一读",
+          "source": "《读者》"
+        }
+      ],
+      "source": "学习强国 · 每日一读（手工种子）",
+      "note": "学习强国「每日一读」频道内容（来自《读者》杂志）。沙箱 / GitHub Actions 无登录态无法直接抓到 API 内容，故先以悟空手工维护 seed 为主——每日一读更新时由用户或悟空把最新 5 篇粘进 items。如要自动抓取，需在 PC 端登录态下跑 fetch_xuexi_search()。"
     },
     "koucai": {
       "title": "每日口才",
@@ -36,27 +77,27 @@
     },
     "rmrb": {
       "title": "人民日报 · 05版 评论",
-      "date": "2026-08-19",
+      "date": "2026-08-20",
       "items": [
         {
-          "title": "“心中有数、手中有策、行动有力”（评论员观察）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175787.html"
+          "title": "以融合放大创新动能（评论员观察）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/20/content_30176099.html"
         },
         {
-          "title": "告别铺摊子，转身上台阶（现场评论）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175788.html"
+          "title": "提效能必须“得其法”（大家谈·认识基层  深入基层  服务基层③）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/20/content_30176100.html"
         },
         {
-          "title": "“碳尽其用”有深意（新知）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175789.html"
+          "title": "生活服务要“讲究”不要“将就”（人民时评）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/20/content_30176101.html"
         },
         {
-          "title": "“不比家底比家风”（纵横）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175790.html"
+          "title": "遮阳篷里的治理智慧（纵横）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/20/content_30176103.html"
         },
         {
-          "title": "找准生态产业发展的燃点（治理者说）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175792.html"
+          "title": "让科创“最先一公里”更无忧（现场评论）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/20/content_30176104.html"
         }
       ]
     }
