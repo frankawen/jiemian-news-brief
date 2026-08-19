@@ -1,0 +1,16 @@
+# 依赖与缓存
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# 系统
+.DS_Store
+Thumbs.db

@@ -1,0 +1,64 @@
+{
+  "updated_at": "2026-08-19T09:26:18+08:00",
+  "date": "2026-08-19",
+  "sections": {
+    "shijing": {
+      "title": "陟岵",
+      "category": "国风·魏风",
+      "original": "陟彼岵兮，瞻望父兮。父曰：嗟！予子行役，夙夜无已。上慎旃哉，犹来！无止！陟彼屺兮，瞻望母兮。母曰：嗟！予季行役，夙夜无寐。上慎旃哉，犹来！无弃！陟彼冈兮，瞻望兄兮。兄曰：嗟！予弟行役，夙夜必偕。上慎旃哉，犹来！无死！",
+      "url": "https://www.gushiwen.cn/shiwenv_6ed686e89556.aspx",
+      "source": "gushiwen.cn 诗经",
+      "note": "译文/注释/赏析为 guwendao 反爬动态加载，需前往原文页查看。"
+    },
+    "mingju": {
+      "title": "龙蟠虎踞金陵郡，古来六代豪华盛。",
+      "yiwen": "钟山龙蟠，石头虎踞，金陵为东南形胜之地，三国时的吴国、东晋、宋、齐、梁、陈，先后六朝在此建都，豪华竟逐，盛极一时。",
+      "zhushi": "龙蟠虎踞：形容地势雄伟险要，今特指南京。",
+      "shangxi": "此句思接千载，写历史长河中的金陵，金陵群山屏障，大江横陈，六朝为帝王之宅，概述那一段灿烂辉煌的往事，以先声夺人。",
+      "url": "https://www.gushiwen.cn/mingju/juv_b8cdec3873ae.aspx",
+      "source": "gushiwen.cn 名句"
+    },
+    "xuexi": {
+      "title": "学习强国 · 每日一读",
+      "date": "2026-08-19",
+      "topic_id": "5427951075763236",
+      "topic_url": "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0&related_id=14122703379888049123&related_type=1&study_comment_disable=0&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236",
+      "url": "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0&related_id=14122703379888049123&related_type=1&study_comment_disable=0&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236",
+      "items": [],
+      "source": "学习强国专题页（纯跳转链接）",
+      "note": "「每日一读」服务端反爬抓不到内容，已改为单跳转链接，点按钮在浏览器打开即可阅读。"
+    },
+    "koucai": {
+      "title": "每日口才",
+      "url": "https://www.xiaohongshu.com/user/profile/65b8f780000000000d01ee44?xsec_token=ABwANG1wqNrs-1dZwP-LM271nvbLBWhkmUyRcR7MzxvrA=&xsec_source=pc_search",
+      "source": "小红书 · 每日口才（图片分享）",
+      "note": "小红书服务端 API 返回 500（风控/需登录态），每日更新该博主主页深链；图文请在 APP 内查看。如需自动转文字，请在本机带登录态运行。"
+    },
+    "rmrb": {
+      "title": "人民日报 · 05版 评论",
+      "date": "2026-08-19",
+      "items": [
+        {
+          "title": "“心中有数、手中有策、行动有力”（评论员观察）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175787.html"
+        },
+        {
+          "title": "告别铺摊子，转身上台阶（现场评论）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175788.html"
+        },
+        {
+          "title": "“碳尽其用”有深意（新知）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175789.html"
+        },
+        {
+          "title": "“不比家底比家风”（纵横）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175790.html"
+        },
+        {
+          "title": "找准生态产业发展的燃点（治理者说）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/19/content_30175792.html"
+        }
+      ]
+    }
+  }
+}
