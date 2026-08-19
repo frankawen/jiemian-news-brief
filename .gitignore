@@ -5,6 +5,12 @@ __pycache__/
 .venv/
 venv/
 
+# IDE
+.idea/
+.vscode/
+*.swp
+*~
+
 # 系统
 .DS_Store
 Thumbs.db

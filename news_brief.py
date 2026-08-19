@@ -35,7 +35,7 @@ import json
 import argparse
 import datetime
 import html
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 import requests
 from bs4 import BeautifulSoup
@@ -162,7 +162,7 @@ def filter_today(items: List[NewsItem], tz: datetime.timezone, today_only: bool)
 # 简报生成
 # ---------------------------------------------------------------------------
 
-def build_brief(categories: Dict[str, List[NewsItem]], tz: datetime.timezone) -> (str, str):
+def build_brief(categories: Dict[str, List[NewsItem]], tz: datetime.timezone) -> Tuple[str, str]:
     """返回 (html, text) 两种格式的简报。
 
     - html_doc：用于 pushplus（带内联样式）
@@ -258,7 +258,7 @@ def build_brief(categories: Dict[str, List[NewsItem]], tz: datetime.timezone) ->
     return html_doc, text_doc
 
 
-def build_placeholder_brief(tz: datetime.timezone) -> (str, str):
+def build_placeholder_brief(tz: datetime.timezone) -> Tuple[str, str]:
     """今日无新快讯时，生成一条占位提醒（html, text）。
 
     保证「每天至少收到一条」：有真新闻的当天不会再补发占位，避免误导；
@@ -321,9 +321,14 @@ def write_news_artifact(
         "source": "界面新闻 · 快报",
         "categories": {name: _cat(name, items) for name, items in categories.items()},
     }
+    total = sum(len(v) for v in data["categories"].values())
+    if total == 0:
+        # 抓取为空（限流 / 页面结构变更 / 网络超时）时，不写文件、不覆盖历史数据，
+        # 避免把空数据提交回仓库，导致工作台端读到三栏目全空的 news.json。
+        print("[warn] 本次抓取为 0 条，跳过写入 news.json（保留旧数据）。", file=sys.stderr)
+        return
     with open("news.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    total = sum(len(v) for v in data["categories"].values())
     print(f"[info] 已写入 news.json（{total} 条）", file=sys.stderr)
 
 
@@ -441,7 +446,24 @@ def _check(resp, name: str) -> bool:
     except Exception:  # noqa: BLE001
         print(f"[error] {name} 推送返回非 JSON：{resp.status_code} {resp.text[:200]}", file=sys.stderr)
         return False
-    ok = resp.status_code == 200 and (data.get("code") in (200, 0, "0") or data.get("errcode") in (0, None))
+
+    if resp.status_code != 200:
+        print(f"[error] {name} 推送失败：HTTP {resp.status_code} {data}", file=sys.stderr)
+        return False
+
+    # 各推送服务返回结构不同，必须按服务区分判定，不能混用 code/errcode。
+    ok = False
+    if name == "pushplus":
+        ok = data.get("code") in (200, "200")
+    elif name == "serverchan":
+        # Server酱 Turbo 版：code==0 表示成功
+        ok = data.get("code") in (0, "0")
+    elif name == "wecom":
+        # 企业微信机器人：errcode==0 表示成功
+        ok = data.get("errcode") in (0, "0")
+    else:
+        ok = False
+
     if ok:
         print(f"[ok] {name} 推送成功：{data}")
     else:

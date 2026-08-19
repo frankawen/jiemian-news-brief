@@ -253,21 +253,40 @@ def fetch_mingju_detail(path):
 # --------------------------------------------------------------------------- #
 def fetch_xuexi_dailyread():
     """学习强国「每日一读」tab：服务端 API 全部反爬（search.xuexi.cn 需签名、article.xuexi.cn
-    未登录 SSR 返兜底 HTML、lgdata 老接口又 GBK 编码 + 找不到本专题 ID），因此按师父要求改为
-    「纯跳转链接」——只给出专题页链接，用户自行点击在浏览器打开阅读。
+    未登录 SSR 返兜底 HTML、lgdata 老接口又 GBK 编码 + 找不到本专题 ID），因此展示手工维护的
+    种子文件 xuexi_seed.json（悟空/师父手工粘入最新几篇《读者》文章）。
 
-    Returns: dict {title, date, topic_url, url, items:[], source, note}
+    Returns: dict {title, date, topic_id, topic_url, url, items, source, note}
     """
     today = now_beijing().strftime("%Y-%m-%d")
+    seed_path = os.path.join(HERE, "xuexi_seed.json")
+    items = []
+    seed_note = ""
+    try:
+        with open(seed_path, encoding="utf-8") as f:
+            seed = json.load(f)
+        items = seed.get("items", []) or []
+        seed_note = seed.get("note", "")
+    except Exception as e:
+        print("xuexi_seed.json 读取失败：", e)
+
+    if items:
+        note = (
+            seed_note
+            or "「每日一读」服务端反爬抓不到内容，以下文章来自手工维护种子（xuexi_seed.json）。"
+        )
+    else:
+        note = "「每日一读」服务端反爬抓不到内容，且暂无种子文章，点按钮在浏览器打开专题页即可阅读。"
+
     return {
         "title": "学习强国 · 每日一读",
         "date": today,
         "topic_id": "5427951075763236",
         "topic_url": XUEXI_TOPIC_URL,
         "url": XUEXI_TOPIC_URL,
-        "items": [],
-        "source": "学习强国专题页（纯跳转链接）",
-        "note": "「每日一读」服务端反爬抓不到内容，已改为单跳转链接，点按钮在浏览器打开即可阅读。",
+        "items": items,
+        "source": "学习强国 · 每日一读（手工种子）",
+        "note": note,
     }
 
 
@@ -368,7 +387,7 @@ def main():
             "source": "gushiwen.cn 名句",
         }
 
-    # 3) 学习强国 · 每日一读（固定 2 篇文章种子）
+    # 3) 学习强国 · 每日一读（手工维护种子 xuexi_seed.json）
     xuexi = fetch_xuexi_dailyread()
     # 4) 口才
     koucai = fetch_koucai()
