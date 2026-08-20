@@ -2,9 +2,9 @@ name: 界面新闻每日快报
 
 on:
   schedule:
-    # 每天两次：北京时间 08:00（首次抓取推送）+ 17:00（补推当天新增）
-    # 对应 UTC 的 0 点和 9 点
-    - cron: "0 0,9 * * *"
+    # 每 3 小时抓取一次，北京时间 XX:16（00:16, 03:16, 06:16, 09:16, 12:16, 15:16, 18:16, 21:16）
+    # 对应 UTC 的 16:16, 19:16, 22:16, 01:16, 04:16, 07:16, 10:16, 13:16
+    - cron: "16 16,19,22,1,4,7,10,13 * * *"
   workflow_dispatch: {}   # 允许在 Actions 页面手动触发
 
 permissions:
@@ -39,7 +39,7 @@ jobs:
           TIMEZONE_OFFSET: ${{ secrets.TIMEZONE_OFFSET }}
         run: python news_brief.py
 
-      - name: 保存去重状态（供 17:00 对 8:00 去重）
+      - name: 保存去重状态（每次抓取后对之前推送去重）
         if: success()
         run: |
           git config user.name "github-actions[bot]"
