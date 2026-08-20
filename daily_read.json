@@ -1,26 +1,26 @@
 {
-  "updated_at": "2026-08-20T13:44:42+08:00",
-  "date": "2026-08-20",
+  "updated_at": "2026-08-21T06:16:58+08:00",
+  "date": "2026-08-21",
   "sections": {
     "shijing": {
-      "title": "载驱",
-      "category": "国风·齐风",
-      "original": "载驱薄薄，簟茀朱鞹。鲁道有荡，齐子发夕。四骊济济，垂辔濔濔。鲁道有荡，齐子岂弟。汶水汤汤，行人彭彭。鲁道有荡，齐子翱翔。汶水滔滔，行人儦儦。鲁道有荡，齐子游遨。",
-      "url": "https://www.gushiwen.cn/shiwenv_7164c08b5c93.aspx",
+      "title": "萚兮",
+      "category": "国风·郑风",
+      "original": "萚兮萚兮，风其吹女。叔兮伯兮，倡予和女。萚兮萚兮，风其漂女。叔兮伯兮，倡予要女。",
+      "url": "https://www.gushiwen.cn/shiwenv_98d78626281f.aspx",
       "source": "gushiwen.cn 诗经",
       "note": "译文/注释/赏析为 guwendao 反爬动态加载，需前往原文页查看。"
     },
     "mingju": {
-      "title": "胡风吹朔雪，千里度龙山。",
-      "yiwen": "胡地寒风裹挟着北方的瑞雪吹越龙山，落到帝都。",
-      "zhushi": "龙山：即逴龙山，因地处极北，天气严寒；后遂用为咏雪之典。",
-      "shangxi": "此处写远在北方的雪被胡地寒风吹越龙山，落到帝都所在。",
-      "url": "https://www.gushiwen.cn/mingju/juv_da600aac93bc.aspx",
+      "title": "叶叶红衣当酒船，细细流霞举。",
+      "yiwen": "片片荷花瓣儿，像少女身上的红衣，用这花瓣儿来盛酒，把那仙酒的滋味，细细地品一品。",
+      "zhushi": "叶叶：言以荷花为盛酒之具。流霞：神话中的仙酒，见《论衡·道虚篇》，此处指美酒。",
+      "shangxi": "此处为动态描写，雨过天晴，细细的五彩流霞从莲荷摇曳攒动的地方冉冉升腾，是何等绚丽的景色。",
+      "url": "https://www.gushiwen.cn/mingju/juv_934c38f9c9bf.aspx",
       "source": "gushiwen.cn 名句"
     },
     "xuexi": {
       "title": "学习强国 · 每日一读",
-      "date": "2026-08-20",
+      "date": "2026-08-21",
       "topic_id": "5427951075763236",
       "topic_url": "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0&related_id=14122703379888049123&related_type=1&study_comment_disable=0&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236",
       "url": "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0&related_id=14122703379888049123&related_type=1&study_comment_disable=0&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236",
@@ -77,27 +77,27 @@
     },
     "rmrb": {
       "title": "人民日报 · 05版 评论",
-      "date": "2026-08-20",
+      "date": "2026-08-21",
       "items": [
         {
-          "title": "以融合放大创新动能（评论员观察）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/20/content_30176099.html"
+          "title": "长出文化精品，需育产业森林（连线评论员）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/21/content_30176328.html"
         },
         {
-          "title": "提效能必须“得其法”（大家谈·认识基层  深入基层  服务基层③）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/20/content_30176100.html"
+          "title": "退伍不褪色，沙海守初心（中国道路中国梦·每一个人都是主角）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/21/content_30176329.html"
         },
         {
-          "title": "生活服务要“讲究”不要“将就”（人民时评）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/20/content_30176101.html"
+          "title": "从“电力账本”看经济向好（人民时评）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/21/content_30176330.html"
         },
         {
-          "title": "遮阳篷里的治理智慧（纵横）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/20/content_30176103.html"
+          "title": "乐见科学家登城市“C位”（纵横）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/21/content_30176332.html"
         },
         {
-          "title": "让科创“最先一公里”更无忧（现场评论）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/20/content_30176104.html"
+          "title": "读懂“两分钟打动人”的密码（微观）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/21/content_30176333.html"
         }
       ]
     }
