@@ -1,26 +1,26 @@
 {
-  "updated_at": "2026-08-21T06:16:58+08:00",
-  "date": "2026-08-21",
+  "updated_at": "2026-08-22T06:14:03+08:00",
+  "date": "2026-08-22",
   "sections": {
     "shijing": {
-      "title": "萚兮",
-      "category": "国风·郑风",
-      "original": "萚兮萚兮，风其吹女。叔兮伯兮，倡予和女。萚兮萚兮，风其漂女。叔兮伯兮，倡予要女。",
-      "url": "https://www.gushiwen.cn/shiwenv_98d78626281f.aspx",
+      "title": "蒹葭",
+      "category": "国风·秦风",
+      "original": "蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。蒹葭采采，白露未已。所谓伊人，在水之涘。溯洄从之，道阻且右。溯游从之，宛在水中沚。",
+      "url": "https://www.gushiwen.cn/shiwenv_15cd220102d6.aspx",
       "source": "gushiwen.cn 诗经",
       "note": "译文/注释/赏析为 guwendao 反爬动态加载，需前往原文页查看。"
     },
     "mingju": {
-      "title": "叶叶红衣当酒船，细细流霞举。",
-      "yiwen": "片片荷花瓣儿，像少女身上的红衣，用这花瓣儿来盛酒，把那仙酒的滋味，细细地品一品。",
-      "zhushi": "叶叶：言以荷花为盛酒之具。流霞：神话中的仙酒，见《论衡·道虚篇》，此处指美酒。",
-      "shangxi": "此处为动态描写，雨过天晴，细细的五彩流霞从莲荷摇曳攒动的地方冉冉升腾，是何等绚丽的景色。",
-      "url": "https://www.gushiwen.cn/mingju/juv_934c38f9c9bf.aspx",
+      "title": "病中之趣味，不可不尝；穷途之景界，不可不历。",
+      "yiwen": "疾病缠身的滋味，一定要亲自体验一下；穷途末路的境界，一定要亲自经历一次。",
+      "zhushi": "穷途：路已走到尽头，比喻处境艰危。",
+      "shangxi": "只有经历过生病，才知道拥有健康是多么重要的事情，只有在绝境之中，才能激发出更为强大的力量。",
+      "url": "https://www.gushiwen.cn/mingju/juv_4edc6ac6b050.aspx",
       "source": "gushiwen.cn 名句"
     },
     "xuexi": {
       "title": "学习强国 · 每日一读",
-      "date": "2026-08-21",
+      "date": "2026-08-22",
       "topic_id": "5427951075763236",
       "topic_url": "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0&related_id=14122703379888049123&related_type=1&study_comment_disable=0&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236",
       "url": "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0&related_id=14122703379888049123&related_type=1&study_comment_disable=0&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236",
@@ -77,27 +77,43 @@
     },
     "rmrb": {
       "title": "人民日报 · 05版 评论",
-      "date": "2026-08-21",
+      "date": "2026-08-22",
       "items": [
         {
-          "title": "长出文化精品，需育产业森林（连线评论员）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/21/content_30176328.html"
+          "title": "城市增韧性  家园更宜居（大数据观察）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176495.html"
         },
         {
-          "title": "退伍不褪色，沙海守初心（中国道路中国梦·每一个人都是主角）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/21/content_30176329.html"
+          "title": "未雨绸缪，城市才能更“皮实”（编辑手记）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176496.html"
         },
         {
-          "title": "从“电力账本”看经济向好（人民时评）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/21/content_30176330.html"
+          "title": "前7月高技术产业实际使用外资占全国超四成",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176497.html"
         },
         {
-          "title": "乐见科学家登城市“C位”（纵横）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/21/content_30176332.html"
+          "title": "《促进网信企业高质量发展行动计划（2026—2030年）》印发",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176498.html"
         },
         {
-          "title": "读懂“两分钟打动人”的密码（微观）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/21/content_30176333.html"
+          "title": "三部门联合推动已故人士金融账户查询服务",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176499.html"
+        },
+        {
+          "title": "“十五五”时期我国将构建现代气候业务体系",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176500.html"
+        },
+        {
+          "title": "两部门细化人民币买卖活动监管要求",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176501.html"
+        },
+        {
+          "title": "广州强化科技创新和产业创新深度融合",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176503.html"
+        },
+        {
+          "title": "甘肃省内县办中医医疗机构覆盖率达98.8%",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176504.html"
         }
       ]
     }
