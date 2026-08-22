@@ -1,26 +1,26 @@
 {
-  "updated_at": "2026-08-22T06:14:03+08:00",
-  "date": "2026-08-22",
+  "updated_at": "2026-08-23T06:12:33+08:00",
+  "date": "2026-08-23",
   "sections": {
     "shijing": {
-      "title": "蒹葭",
-      "category": "国风·秦风",
-      "original": "蒹葭苍苍，白露为霜。所谓伊人，在水一方。溯洄从之，道阻且长。溯游从之，宛在水中央。蒹葭萋萋，白露未晞。所谓伊人，在水之湄。溯洄从之，道阻且跻。溯游从之，宛在水中坻。蒹葭采采，白露未已。所谓伊人，在水之涘。溯洄从之，道阻且右。溯游从之，宛在水中沚。",
-      "url": "https://www.gushiwen.cn/shiwenv_15cd220102d6.aspx",
+      "title": "关雎",
+      "category": "国风·周南",
+      "original": "关关雎鸠，在河之洲。窈窕淑女，君子好逑。参差荇菜，左右流之。窈窕淑女，寤寐求之。求之不得，寤寐思服。悠哉悠哉，辗转反侧。参差荇菜，左右采之。窈窕淑女，琴瑟友之。参差荇菜，左右芼之。窈窕淑女，钟鼓乐之。",
+      "url": "https://www.gushiwen.cn/shiwenv_4c5705b99143.aspx",
       "source": "gushiwen.cn 诗经",
       "note": "译文/注释/赏析为 guwendao 反爬动态加载，需前往原文页查看。"
     },
     "mingju": {
-      "title": "病中之趣味，不可不尝；穷途之景界，不可不历。",
-      "yiwen": "疾病缠身的滋味，一定要亲自体验一下；穷途末路的境界，一定要亲自经历一次。",
-      "zhushi": "穷途：路已走到尽头，比喻处境艰危。",
-      "shangxi": "只有经历过生病，才知道拥有健康是多么重要的事情，只有在绝境之中，才能激发出更为强大的力量。",
-      "url": "https://www.gushiwen.cn/mingju/juv_4edc6ac6b050.aspx",
+      "title": "杜牧司勋字牧之，清秋一首杜秋诗。",
+      "yiwen": "杜牧司勋的字是牧之，一首《杜秋娘诗》就像清秋一样高远清新。",
+      "zhushi": "杜秋诗：指杜牧的《杜秋娘诗》。",
+      "shangxi": "此句写杜牧的官职、名、字和诗作，语言轻快跳脱，很富诗情。《杜秋娘诗》这首诗为杜牧刻意精心之作，颇能代表杜牧诗“刻意伤春复伤别”之基调。",
+      "url": "https://www.gushiwen.cn/mingju/juv_cccce3a40d18.aspx",
       "source": "gushiwen.cn 名句"
     },
     "xuexi": {
       "title": "学习强国 · 每日一读",
-      "date": "2026-08-22",
+      "date": "2026-08-23",
       "topic_id": "5427951075763236",
       "topic_url": "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0&related_id=14122703379888049123&related_type=1&study_comment_disable=0&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236",
       "url": "https://article.xuexi.cn/news/index.html?source=share&study_style_id=feeds_pure&reco_id=103ae257e010ac14f3cf000d&share_to=wx_single&study_share_enable=0&related_id=14122703379888049123&related_type=1&study_comment_disable=0&ref_read_id=AFB1543C-1E09-4339-9592-52C8DBA40C00#/special-topic/5427951075763236",
@@ -77,43 +77,19 @@
     },
     "rmrb": {
       "title": "人民日报 · 05版 评论",
-      "date": "2026-08-22",
+      "date": "2026-08-23",
       "items": [
         {
-          "title": "城市增韧性  家园更宜居（大数据观察）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176495.html"
+          "title": "援疆教师，他们共同的名字（深聚焦）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/23/content_30176506.html"
         },
         {
-          "title": "未雨绸缪，城市才能更“皮实”（编辑手记）",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176496.html"
+          "title": "“小辉”们的别样夏天（在一线）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/23/content_30176507.html"
         },
         {
-          "title": "前7月高技术产业实际使用外资占全国超四成",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176497.html"
-        },
-        {
-          "title": "《促进网信企业高质量发展行动计划（2026—2030年）》印发",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176498.html"
-        },
-        {
-          "title": "三部门联合推动已故人士金融账户查询服务",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176499.html"
-        },
-        {
-          "title": "“十五五”时期我国将构建现代气候业务体系",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176500.html"
-        },
-        {
-          "title": "两部门细化人民币买卖活动监管要求",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176501.html"
-        },
-        {
-          "title": "广州强化科技创新和产业创新深度融合",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176503.html"
-        },
-        {
-          "title": "甘肃省内县办中医医疗机构覆盖率达98.8%",
-          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/22/content_30176504.html"
+          "title": "用戏剧播撒美育的种子（师说）",
+          "url": "https://paper.people.com.cn/rmrb/pc/content/202608/23/content_30176508.html"
         }
       ]
     }
