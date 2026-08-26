@@ -1,8 +1,9 @@
 name: 词语储备每日爬取
 
 on:
-  schedule:
-    - cron: "15 20 * * *"
+  # 定时已停用（2026-08-26）：工作台不依赖本仓库，停止每日自动爬取；保留手动触发与仓库
+  # schedule:
+  #   - cron: "15 20 * * *"
   workflow_dispatch:
 
 permissions:
